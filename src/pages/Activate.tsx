@@ -10,7 +10,16 @@ import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const SUPPORTED_CURRENCIES = ["btc", "eth", "usdt", "ltc", "trx", "sol", "bnb", "doge"];
+const SUPPORTED_CURRENCIES = [
+  { label: "BTC", value: "btc" },
+  { label: "ETH", value: "eth" },
+  { label: "USDT (TRC20)", value: "usdttrc20" },
+  { label: "LTC", value: "ltc" },
+  { label: "TRX", value: "trx" },
+  { label: "SOL", value: "sol" },
+  { label: "BNB (BSC)", value: "bnbbsc" },
+  { label: "DOGE", value: "doge" },
+];
 
 const Activate = () => {
   const [searchParams] = useSearchParams();
