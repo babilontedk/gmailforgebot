@@ -1,18 +1,33 @@
-import { Link, useLocation } from "react-router-dom";
-import { Mail, Menu, X } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Mail, Menu, X, LogOut, Gift } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/useAuth";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, signOut } = useAuth();
 
-  const links = [
+  const publicLinks = [
     { to: "/", label: "Home" },
     { to: "/pricing", label: "Pricing" },
+  ];
+
+  const authLinks = [
     { to: "/dashboard", label: "Dashboard" },
+    { to: "/referrals", label: "Referrals" },
     { to: "/activate", label: "Activate Plan" },
   ];
+
+  const links = user ? [...publicLinks, ...authLinks] : publicLinks;
+
+  const handleSignOut = async () => {
+    await signOut();
+    setMobileOpen(false);
+    navigate("/login");
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass">
@@ -37,11 +52,17 @@ const Navbar = () => {
               {link.label}
             </Link>
           ))}
-          <Link to="/dashboard">
-            <Button size="sm" className="bg-gradient-primary text-primary-foreground hover:opacity-90 transition-opacity">
-              Get Started
+          {user ? (
+            <Button size="sm" variant="ghost" onClick={handleSignOut} className="text-muted-foreground hover:text-destructive">
+              <LogOut className="w-4 h-4 mr-1" /> Logout
             </Button>
-          </Link>
+          ) : (
+            <Link to="/login">
+              <Button size="sm" className="bg-gradient-primary text-primary-foreground hover:opacity-90 transition-opacity">
+                Get Started
+              </Button>
+            </Link>
+          )}
         </div>
 
         {/* Mobile toggle */}
@@ -66,11 +87,17 @@ const Navbar = () => {
                 {link.label}
               </Link>
             ))}
-            <Link to="/dashboard" onClick={() => setMobileOpen(false)}>
-              <Button size="sm" className="w-full bg-gradient-primary text-primary-foreground">
-                Get Started
+            {user ? (
+              <Button size="sm" variant="ghost" onClick={handleSignOut} className="w-full justify-start text-muted-foreground hover:text-destructive">
+                <LogOut className="w-4 h-4 mr-1" /> Logout
               </Button>
-            </Link>
+            ) : (
+              <Link to="/login" onClick={() => setMobileOpen(false)}>
+                <Button size="sm" className="w-full bg-gradient-primary text-primary-foreground">
+                  Get Started
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
       )}
