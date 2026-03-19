@@ -208,16 +208,16 @@ const Activate = () => {
                 <div className="grid grid-cols-4 gap-2">
                   {SUPPORTED_CURRENCIES.map((cur) => (
                     <button
-                      key={cur}
+                      key={cur.value}
                       type="button"
-                      onClick={() => setPayCurrency(cur)}
+                      onClick={() => setPayCurrency(cur.value)}
                       className={`rounded-lg py-2 px-3 text-xs font-bold uppercase border transition-all ${
-                        payCurrency === cur
+                        payCurrency === cur.value
                           ? "border-primary bg-primary/10 text-primary"
                           : "border-border bg-muted text-muted-foreground hover:border-primary/40"
                       }`}
                     >
-                      {cur}
+                      {cur.label}
                     </button>
                   ))}
                 </div>
