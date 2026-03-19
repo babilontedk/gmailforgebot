@@ -108,7 +108,7 @@ const Referrals = () => {
               <Gift className="w-8 h-8 text-accent-foreground" />
             </div>
             <h1 className="text-2xl md:text-3xl font-bold text-foreground">Referral Program</h1>
-            <p className="text-muted-foreground mt-1">Share your code and grow the community</p>
+            <p className="text-muted-foreground mt-1"> earn 0.50$ and 0.01 per sign up.Share your code and grow the community</p>
           </div>
 
           {/* Your Referral Code */}
