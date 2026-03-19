@@ -89,7 +89,7 @@ const Register = () => {
 
       toast({
         title: "Account created!",
-        description: "Please check your email to verify your account before logging in.",
+        description: "Please check your email spam/imbox to verify your account before logging in.",
       });
       navigate("/login");
     } catch (err: any) {
